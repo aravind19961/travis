@@ -1,0 +1,16 @@
+language:node_js
+node_js:
+  -13
+services:
+  -docker
+install:
+  -echo "nothing needed here for the project"
+before_script:
+  -echo "no tests"
+script:
+  -docker --version
+  -docker build -t simplenodes
+  -docker tag simplenodes thor199612/hmm:latest
+after_script:
+  - echo "$DOCKER_PASSWORD" | docker login -u "$DOCKER_USERNAME" --password-stdin
+  - docker push thor199612/hmm
